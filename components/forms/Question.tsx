@@ -19,6 +19,7 @@ import { questionsSchema } from '@/lib/validations';
 import { z } from 'zod';
 import { Badge } from '../ui/badge';
 import Image from 'next/image';
+import { createQuestion } from '@/lib/actions/question.action';
 
 const type: any = 'create';
 
@@ -63,10 +64,10 @@ const Question = () => {
     const newTags = field.value.filter((t: string) => t !== tag);
     form.setValue('tags', newTags);
   };
-  function onSubmit(values: z.infer<typeof questionsSchema>) {
+  async function onSubmit(values: z.infer<typeof questionsSchema>) {
     setIsSubmitting(true);
     try {
-      // make a async call to submit form
+      await createQuestion({});
     } catch (error) {
     } finally {
       setIsSubmitting(false);
@@ -115,6 +116,8 @@ const Question = () => {
                     // @ts-ignore
                     editorRef.current = editor;
                   }}
+                  onBlur={field.onBlur}
+                  onEditorChange={(content) => field.onChange(content)}
                   apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
                   init={{
                     height: 350,
