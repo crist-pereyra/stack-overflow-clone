@@ -9,57 +9,6 @@ import { getQuestions } from '@/lib/actions/question.action';
 import Link from 'next/link';
 import React from 'react';
 
-const questions = [
-  {
-    _id: '1',
-    title: 'What is the best programming language to learn?',
-    tags: [
-      { _id: '1', name: 'python' },
-      { _id: '2', name: 'java' },
-    ],
-    author: {
-      _id: '1',
-      name: 'John Doe',
-      picture: 'https://example.com/pictures/john.jpg',
-    },
-    upvotes: 234240,
-    views: 100000000,
-    answers: [
-      {
-        content:
-          'It depends on what you want to achieve. Python is great for beginners and web development, while Java is widely used in enterprise environments.',
-      },
-      {
-        content:
-          'Consider the job market and your personal interest. Both Python and Java are highly valued skills.',
-      },
-    ],
-    createdAt: new Date('2022-01-01T12:00:00.000Z'),
-  },
-  {
-    _id: '2',
-    title: 'How to center an image in CSS?',
-    tags: [
-      { _id: '3', name: 'css' },
-      { _id: '2', name: 'java' },
-    ],
-    author: {
-      _id: '1',
-      name: 'John Doe',
-      picture: 'https://example.com/pictures/john.jpg',
-    },
-    upvotes: 10,
-    views: 100,
-    answers: [
-      { content: "Use the CSS property 'display: block; margin: auto;'" },
-      {
-        content:
-          "You can also use Flexbox: 'display: flex; justify-content: center; align-items: center;'",
-      },
-    ],
-    createdAt: new Date('2023-01-01T12:00:00.000Z'),
-  },
-];
 const Home = async () => {
   const result = await getQuestions({});
 
