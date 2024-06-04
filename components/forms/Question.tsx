@@ -21,6 +21,7 @@ import { Badge } from '../ui/badge';
 import Image from 'next/image';
 import { createQuestion } from '@/lib/actions/question.action';
 import { usePathname, useRouter } from 'next/navigation';
+import { useTheme } from '@/context/ThemeProvider';
 
 const type: any = 'create';
 interface Props {
@@ -28,6 +29,7 @@ interface Props {
 }
 const Question = ({ mongoUserId }: Props) => {
   const editorRef = useRef(null);
+  const { mode } = useTheme();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
@@ -156,13 +158,16 @@ const Question = ({ mongoUserId }: Props) => {
                       'undo redo  | ' +
                       'codesample | bold italic forecolor | alignleft aligncenter |' +
                       ' alignright alignjustify | numlist bullist',
-                    content_style: 'body { font-family:Inter; font-size:16px }',
+                    content_style:
+                      'dark body { font-family:Inter; font-size:16px }',
                     // tinycomments_mode: 'embedded',
                     // tinycomments_author: 'Author name',
                     // mergetags_list: [
                     //   { value: 'First.Name', title: 'First Name' },
                     //   { value: 'Email', title: 'Email' },
                     // ],
+                    skin: mode === 'dark' ? 'oxide-dark' : 'oxide',
+                    content_css: mode === 'dark' ? 'dark' : 'light',
                   }}
                   initialValue=''
                 />
