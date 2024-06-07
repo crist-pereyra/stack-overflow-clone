@@ -44,7 +44,7 @@ export const createQuestion = async (params: CreateQuestionParams) => {
         { $setOnInsert: { name: tag }, $push: { questions: question._id } },
         { upsert: true, new: true }
       );
-      tagDocuments.push(existingTag);
+      tagDocuments.push(existingTag._id);
     }
     // update the question
     await Question.findByIdAndUpdate(question._id, {
