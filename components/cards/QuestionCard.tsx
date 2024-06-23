@@ -3,6 +3,8 @@ import React from 'react';
 import RenderTag from '../shared/RenderTag';
 import Metric from '../shared/Metric';
 import { formatBigNumber, getTimestamp } from '@/lib/utils';
+import EditDeleteAction from '../shared/EditDeleteAction';
+import { SignedIn } from '@clerk/nextjs';
 interface QuestionProps {
   _id: string;
   title: string;
@@ -19,7 +21,7 @@ interface QuestionProps {
   views: number;
   answers: Array<object>;
   createdAt: Date;
-  clerkId?: string;
+  clerkId?: string | null | undefined;
 }
 const QuestionCard = ({
   _id,
@@ -32,6 +34,9 @@ const QuestionCard = ({
   createdAt,
   clerkId,
 }: QuestionProps) => {
+  console.log('clerkId', clerkId);
+  console.log('author.clerkId', author);
+  const showActionsButtons = clerkId && clerkId === author.clerkId;
   return (
     <div className='card-wrapper rounded-[10px] p-9 sm:px-11'>
       <div className='flex flex-col-reverse items-start justify-between gap-5 sm:flex-row'>
@@ -45,7 +50,11 @@ const QuestionCard = ({
             </h3>
           </Link>
         </div>
-        {/* TODO: Add edit actions */}
+        <SignedIn>
+          {showActionsButtons && (
+            <EditDeleteAction type='Question' itemId={JSON.stringify(_id)} />
+          )}
+        </SignedIn>
       </div>
       <div className='mt-3.5 flex flex-wrap gap-2'>
         {tags.map((tag) => (

@@ -14,7 +14,7 @@ const AnswerTab = async ({ searchProps, userId, clerkId }: Props) => {
         <AnswerCard
           key={answer._id}
           _id={answer._id}
-          clerkId={answer._id}
+          clerkId={clerkId}
           question={answer.question}
           author={answer.author}
           upvotes={answer.upvotes.length}

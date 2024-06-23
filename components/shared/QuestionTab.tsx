@@ -4,7 +4,7 @@ import React from 'react';
 import QuestionCard from '../cards/QuestionCard';
 interface Props extends SearchParamsProps {
   userId: string;
-  clerkId?: string | null;
+  clerkId?: string | null | undefined;
 }
 const QuestionTab = async ({ searchProps, userId, clerkId }: Props) => {
   const result = await getUserQuestions({ userId, page: 1 });
@@ -14,7 +14,7 @@ const QuestionTab = async ({ searchProps, userId, clerkId }: Props) => {
         <QuestionCard
           key={question._id}
           _id={question._id}
-          clerkId={question._id}
+          clerkId={clerkId}
           title={question.title}
           tags={question.tags}
           author={question.author}
