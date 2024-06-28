@@ -15,7 +15,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Home | Dev Overflow',
   description:
-    'Dev Overflow is a community of 1,000,000+ developers. Join the community and ask questions.',
+    'Dev Overflow is a community of 1,000,000+ developers! Join the community and ask questions.',
 };
 
 const Home = async ({ searchParams }: SearchParamsProps) => {
