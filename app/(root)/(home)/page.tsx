@@ -6,24 +6,51 @@ import Pagination from '@/components/shared/Pagination';
 import LocalSearchbar from '@/components/shared/search/LocalSearchbar';
 import { Button } from '@/components/ui/button';
 import { HomePageFilters } from '@/constants/filters';
-import { getQuestions } from '@/lib/actions/question.action';
+import {
+  getQuestions,
+  getRecommendedQuestions,
+} from '@/lib/actions/question.action';
 import { SearchParamsProps } from '@/types';
 import Link from 'next/link';
 import React from 'react';
 import type { Metadata } from 'next';
+import { auth } from '@clerk/nextjs/server';
 
 export const metadata: Metadata = {
   title: 'Home | Dev Overflow',
   description:
-    'Dev Overflow is a community of 1,000,000+ developers! Join the community and ask questions.',
+    'A community-driven platform for asking and answering programming questions. Get help, share knowledge, and build your own community. Explore topics in web development, mobile app development, data science, and more.',
+  icons: {
+    icon: '/assets/images/site-logo.svg',
+  },
+  openGraph: {
+    images: '/assets/images/demo.jpg',
+  },
 };
 
 const Home = async ({ searchParams }: SearchParamsProps) => {
-  const result = await getQuestions({
-    searchQuery: searchParams.q,
-    filter: searchParams.filter,
-    page: searchParams.page ? +searchParams.page : 1,
-  });
+  const { userId } = auth();
+  let result;
+  if (searchParams?.filter === 'recommended') {
+    if (userId) {
+      result = await getRecommendedQuestions({
+        userId,
+        searchQuery: searchParams.q,
+        page: searchParams.page ? +searchParams.page : 1,
+      });
+    } else {
+      result = {
+        question: [],
+        isNext: false,
+      };
+    }
+  } else {
+    result = await getQuestions({
+      searchQuery: searchParams.q,
+      filter: searchParams.filter,
+      page: searchParams.page ? +searchParams.page : 1,
+    });
+  }
 
   return (
     <>
@@ -51,8 +78,8 @@ const Home = async ({ searchParams }: SearchParamsProps) => {
       </div>
       <HomeFilters />
       <div className='mt-10 flex w-full flex-col gap-6'>
-        {result.questions.length > 0 ? (
-          result.questions.map((question) => (
+        {result && result.questions && result?.questions?.length > 0 ? (
+          result?.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
