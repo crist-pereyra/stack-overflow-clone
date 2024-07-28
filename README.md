@@ -1,6 +1,6 @@
 # Dev Overflow 📚
 
-![Kanban Preview](/public/assets/images/demo.jpg)
+![Dev Overflow Preview](/public/assets/images/demo.jpg)
 
 ## 🌐 Live Demo
 

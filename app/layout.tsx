@@ -2,7 +2,7 @@
 import React from 'react';
 import { ClerkProvider } from '@clerk/nextjs';
 import { Inter, Space_Grotesk } from 'next/font/google';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import '../styles/prism.css';
 import { ThemeProvider } from '@/context/ThemeProvider';
@@ -29,6 +29,9 @@ export const metadata: Metadata = {
   openGraph: {
     images: '/assets/images/demo.jpg',
   },
+};
+export const viewport: Viewport = {
+  themeColor: '#FF7000',
 };
 export default function RootLayout({
   children,
