@@ -1,10 +1,11 @@
 # Dev Overflow 📚
 
-![Dev Overflow Preview](/public/assets/images/demo.jpg)
-
 ## 🌐 Live Demo
 
-Explore the live demonstration of the project: [nextjs14-devoverflow](https://stack-overflow-clone-amber.vercel.app/)
+Explore the live demonstration of the project: [nextjs14-dev-overflow](https://stack-overflow-clone-amber.vercel.app/)
+
+![Dev Overflow Preview](/public/assets/images/demo.jpg)
+![Dev Overflow Preview 2](/public/assets/images/demo2.png)
 
 Welcome to the Dev Overflow project! This is a modern, intuitive, and feature-rich clone of Stack Overflow built with the following awesome technologies:
 
